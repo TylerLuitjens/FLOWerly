@@ -71,15 +71,15 @@ public class Checkpoint{
 	public String toString(){
 		String chkpt = "";
 		if(name != null)
-			chkpt = "Name: " + name + "\n";
+			chkpt = "Name: " + name + "\n\n";
 		else
-			chkpt = "--No name set-- \n";
+			chkpt = "--No name set-- \n\n";
 		if(text != null)
-			chkpt = chkpt.concat("  Contents: " + text + "\n");
+			chkpt = chkpt.concat("Contents: \n" + text + "\n\n");
 		else
-			chkpt = chkpt.concat("  --No text added--\n");
-		chkpt = chkpt.concat("  Number of parents: " + parents.size() + "\n");
-		chkpt = chkpt.concat("  Number of children: " + children.size() + "\n");
+			chkpt = chkpt.concat("--No text added--\n\n");
+		chkpt = chkpt.concat("Number of parents: " + parents.size() + "\n");
+		chkpt = chkpt.concat("Number of children: " + children.size() + "\n");
 		return chkpt;
 	}
 
