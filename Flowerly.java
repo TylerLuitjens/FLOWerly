@@ -3,6 +3,7 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.geom.Line2D;
 import java.awt.Insets;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
@@ -18,17 +19,19 @@ import javax.swing.JTextArea;
 import javax.swing.ScrollPaneLayout;
 import javax.swing.WindowConstants;
 import javax.swing.plaf.basic.BasicScrollBarUI;
+import javax.swing.border.EmptyBorder;
 
 
-
-public class Flowerly {
+public class Flowerly extends JPanel{
+	private static Point startPoint;
+	private static Point endPoint;
   public static void main(String[] args) {
 
 	Checkpoint chkpt = new Checkpoint();
 	chkpt.setText("This is a test entry for the checkpoint system. Hopefully these contents will someday hold part of a storyt that will be told interactively through the command line. The next step is to make the GUI that will show the full tree of children and parents, as well as make a new child from a given parent.I also need to figure out how to print it to the terminal nicely without having words get cut in half, although that might get fixed with the gui itself being able to wrap the text nicely");
 	chkpt.setName("Test checkpoint");
 
-    	JTextArea textArea = new JTextArea(10,25);
+    	JTextArea textArea = new JTextArea(5,15);
 	textArea.setText(chkpt.toString());
 	textArea.setBackground(Color.LIGHT_GRAY);
 	textArea.setEditable(false);
@@ -75,15 +78,46 @@ public class Flowerly {
     JFrame frame = new JFrame("FLOWerly - Find Your Flow");
 
 	JPanel panel = new JPanel();
-	panel.setLayout(new FlowLayout());
+	//panel.setBorder(new EmptyBorder(10,10,10,10));
+	//panel.setLayout(null);
 	panel.setBackground(Color.DARK_GRAY);
-    
+    	panel.setBounds(485,10,300,100);
 	frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 	frame.getContentPane().setBackground(Color.DARK_GRAY);
- 	panel.add(scrollPane);   
+	frame.getContentPane().setLayout(null);
+ 	panel.add(scrollPane); 
+
+	JPanel testPanel = new JPanel();
+	testPanel.setBackground(Color.cyan);
+	testPanel.setBounds(485, 170, 300, 100);
+	startPoint = new Point(testPanel.getX(), testPanel.getY());
+	endPoint = new Point(panel.getX(), panel.getY());
+	drawLine(startPoint,endPoint);
+
 	frame.add(panel);
-    frame.setSize(1280, 720);
-    frame.setVisible(true);
+	frame.add(testPanel);
+    	frame.setSize(1280, 720);
+    	frame.setVisible(true);
   }
+
+
+
+  public static void drawLine(Point startPoint, Point endPoint) {
+            this.startPoint = startPoint;
+            this.endPoint = endPoint;
+            repaint();
+        }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            if (startPoint != null && endPoint != null) {
+                Graphics2D g2d = (Graphics2D) g.create();
+                Line2D line = new Line2D.Double(startPoint, endPoint);
+                g2d.setColor(Color.BLACK);
+                g2d.draw(line);
+                g2d.dispose();
+            }
+        }
 }
 
