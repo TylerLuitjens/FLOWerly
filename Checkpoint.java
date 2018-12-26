@@ -80,7 +80,7 @@ public class Checkpoint implements Serializable{
 
 	private void setTextArea(){
 		JTextArea textArea = new JTextArea(5,15);
-		textArea.setMargin( new Insets(0,10,0,10) );
+		textArea.setMargin( new Insets(5,10,0,10) );
 		textArea.setText(this.toString());
 		textArea.setBackground(Color.LIGHT_GRAY);
 		textArea.setEditable(false);

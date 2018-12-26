@@ -10,6 +10,8 @@ public class Flowerly extends JPanel{
   private static Point endPoint;
   private static ArrayList<Checkpoint> checkpoints;
   private static JFrame frame;
+
+
   public static void main(String[] args) {
     checkpoints = new ArrayList<Checkpoint>();
 
@@ -37,8 +39,10 @@ public class Flowerly extends JPanel{
    
   }
 
+
+
   //sets up the scrollbar look
-  public static void setLayout(JScrollPane scroller){
+  private static void setLayout(JScrollPane scroller){
    
     scroller.setLayout(new ScrollPaneLayout() {
       @Override
