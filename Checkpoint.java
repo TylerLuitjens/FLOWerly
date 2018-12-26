@@ -1,4 +1,7 @@
 import java.util.ArrayList; 
+import javax.swing.JTextArea;
+import java.awt.Insets;
+import java.awt.Color;
 
 public class Checkpoint{
 	
@@ -6,6 +9,7 @@ public class Checkpoint{
 	private Checkpoint parent;
 	private ArrayList<Checkpoint> children, parents;
 	private int x,y;
+	private JTextArea textArea;
 	public Checkpoint(){
 		text = null;
 		name = null;
@@ -13,6 +17,7 @@ public class Checkpoint{
 		children = new ArrayList<Checkpoint>();
 		x = -1;
 		y = -1;
+		setTextArea();
 	}
 	
 	public void setX(int x){
@@ -38,6 +43,7 @@ public class Checkpoint{
 
 	public void setText(String newText){
 		text = newText;
+		textArea.setText(this.toString());
 	}
 	
 	public String getText(){
@@ -46,6 +52,7 @@ public class Checkpoint{
 
 	public void addChild(Checkpoint child){
 		children.add(child);
+		textArea.setText(this.toString());
 	}
 	
 	public ArrayList<Checkpoint> getChildren(){
@@ -54,6 +61,7 @@ public class Checkpoint{
 
 	public void addParent(Checkpoint parent){
 		parents.add(parent);
+		textArea.setText(this.toString());
 	}
 
 	public ArrayList<Checkpoint> getParents(){
@@ -62,10 +70,26 @@ public class Checkpoint{
 	
 	public void setName(String name){
 		this.name = name;
+		textArea.setText(this.toString());
 	}
 
 	public String getName(){
 		return name;
+	}
+
+	private void setTextArea(){
+		JTextArea textArea = new JTextArea(5,15);
+		textArea.setMargin( new Insets(0,10,0,10) );
+		textArea.setText(this.toString());
+		textArea.setBackground(Color.LIGHT_GRAY);
+		textArea.setEditable(false);
+		textArea.setLineWrap(true);
+		textArea.setWrapStyleWord(true);
+		this.textArea = textArea;
+	}
+
+	public JTextArea getTextArea(){
+		return textArea;
 	}
 
 	public String toString(){
