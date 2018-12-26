@@ -34,9 +34,10 @@ public class Flowerly extends JPanel{
     check.setText("Hello from the final text box I will be adding text to this way. From now on I will be doing it through the input box I will be adding in at a later time"); 
 
     Checkpoint point = new Checkpoint();
+   
+    createOrUpdate();
     checkpoints.add(point);
     createOrUpdate();
-   
   }
 
 
@@ -113,9 +114,10 @@ public class Flowerly extends JPanel{
       frame.getContentPane().setLayout(null);
       frame.setSize(1400, 720);
     }
-    else{
+    else{ //TODO This doesnt work
       frame.removeAll();
       frame.revalidate();
+      frame.repaint();
     }
     for(Checkpoint c : checkpoints){
       JPanel panel = new JPanel();
