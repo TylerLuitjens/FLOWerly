@@ -2,8 +2,8 @@ import java.util.ArrayList;
 import javax.swing.JTextArea;
 import java.awt.Insets;
 import java.awt.Color;
-
-public class Checkpoint{
+import java.io.*;
+public class Checkpoint implements Serializable{
 	
 	private String text, name;
 	private Checkpoint parent;
@@ -11,8 +11,8 @@ public class Checkpoint{
 	private int x,y;
 	private JTextArea textArea;
 	public Checkpoint(){
-		text = null;
-		name = null;
+		text = " --NO TEXT SET-- ";
+		name = " --NO NAME SET-- ";
 		parents = new ArrayList<Checkpoint>();
 		children = new ArrayList<Checkpoint>();
 		x = -1;
@@ -62,6 +62,7 @@ public class Checkpoint{
 	public void addParent(Checkpoint parent){
 		parents.add(parent);
 		textArea.setText(this.toString());
+		parent.addChild(this);
 	}
 
 	public ArrayList<Checkpoint> getParents(){
@@ -69,7 +70,7 @@ public class Checkpoint{
 	}
 	
 	public void setName(String name){
-		this.name = name;
+		this.name = "--" + name + "--";
 		textArea.setText(this.toString());
 	}
 
@@ -92,18 +93,12 @@ public class Checkpoint{
 		return textArea;
 	}
 
+
 	public String toString(){
-		String chkpt = "";
-		if(name != null)
-			chkpt = "Name: " + name + "\n\n";
-		else
-			chkpt = "--No name set-- \n\n";
-		if(text != null)
-			chkpt = chkpt.concat("Contents: \n" + text + "\n\n");
-		else
-			chkpt = chkpt.concat("--No text added--\n\n");
-		chkpt = chkpt.concat("Number of parents: " + parents.size() + "\n");
-		chkpt = chkpt.concat("Number of children: " + children.size() + "\n");
+		String chkpt =   name + "\n\n";
+		chkpt = chkpt.concat(text + "\n\n");
+		chkpt = chkpt.concat("Num parents: " + parents.size() + "\n");
+		chkpt = chkpt.concat("Num children: " + children.size());
 		return chkpt;
 	}
 
