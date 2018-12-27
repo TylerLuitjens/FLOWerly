@@ -10,31 +10,34 @@ public class Flowerly extends JPanel{
   private static Point endPoint;
   private static ArrayList<Checkpoint> checkpoints;
   private static JFrame frame;
-
-
+  private static JScrollPane mainPane;
+  private static JPanel container;
   public static void main(String[] args) {
     checkpoints = new ArrayList<Checkpoint>();
 
     Checkpoint chkpt = new Checkpoint();
     checkpoints.add(chkpt);
-    chkpt.setText("This is a test entry for the checkpoint system. Hopefully these contents will someday hold part of a storyt that will be told interactively through the command line. The next step is to make the GUI that will show the full tree of children and parents, as well as make a new child from a given parent.I also need to figure out how to print it to the terminal nicely without having words get cut in half, although that might get fixed with the gui itself being able to wrap the text nicely");
+    chkpt.setText("This is a test entry for the checkpoint system. Hopefully these contents will someday hold part of a story that will be told interactively through the command line. The next step is to make the GUI that will show the full tree of children and parents, as well as make a new child from a given parent.I also need to figure out how to print it to the terminal nicely without having words get cut in half, although that might get fixed with the gui itself being able to wrap the text nicely");
     chkpt.setName("Test checkpoint");
 
     Checkpoint textField = new Checkpoint();
     checkpoints.add(textField);
     textField.addParent(chkpt);
-    
+    textField.setName("textField");
+
     Checkpoint testField = new Checkpoint();
     checkpoints.add(testField);
     testField.addParent(chkpt);
+    testField.setName("testField");
 
     Checkpoint check = new Checkpoint();
     checkpoints.add(check);
     check.addParent(testField);
     check.setText("Hello from the final text box I will be adding text to this way. From now on I will be doing it through the input box I will be adding in at a later time"); 
-
+    check.setName("check");
+  
     Checkpoint point = new Checkpoint();
-   
+    point.setName("point");
     createOrUpdate();
     checkpoints.add(point);
     createOrUpdate();
@@ -80,7 +83,6 @@ public class Flowerly extends JPanel{
     scroller.getVerticalScrollBar().setOpaque(false);
     scroller.getVerticalScrollBar().setUI(new MyScrollBarUI());
 
-    save();
   }
 
   private static void save(){
@@ -94,47 +96,54 @@ public class Flowerly extends JPanel{
   }
 
   private static void createOrUpdate(){
-    //TODO set bound mapping
+    //TODO need to make this whole jframe scrollable, which still doesnt work
     int numDrawn;
-    int x = 0;
+    int x = 15;
     if(checkpoints.size() > 0){
       if(checkpoints.size() == 1)
         x = 550;
       else  
         x = 1400 / checkpoints.size() - 305;
-      if(x < 0)
-        x = 0;
+      if(x < 15)
+        x = 15;
     }
     
     int y = 10;
-    if(frame == null){
+    if(frame == null)
+    {
       frame = new JFrame("FLOWerly - Find Your Flow");
       frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
       frame.getContentPane().setBackground(Color.DARK_GRAY);
-      frame.getContentPane().setLayout(null);
+      //frame.getContentPane().setLayout(null);
       frame.setSize(1400, 720);
+      frame.setVisible(true);
+
+      container = new JPanel(null);
+      container.setBackground(Color.DARK_GRAY);
+      mainPane = new JScrollPane(container);
+      setLayout(mainPane);
+      mainPane.setBackground(Color.DARK_GRAY);
     }
-    else{ //TODO This doesnt work
-      frame.removeAll();
-      frame.revalidate();
-      frame.repaint();
+    else{
+      container.removeAll();
+      container.revalidate();
+      container.repaint();
     }
     for(Checkpoint c : checkpoints){
-      JPanel panel = new JPanel();
-      panel.setBackground(Color.DARK_GRAY);
-      panel.setBounds(x, y, 300, 100);
       JScrollPane pane = new JScrollPane(c.getTextArea());
       setLayout(pane);
-      panel.add(pane);
-      frame.add(panel);
+      pane.setBounds(x, y, 300, 100);
+      container.add(pane);
       x += 350;
-      if(x > 1400 - 300){
-        x = 0;
+      if(x > 1100){
+        x = 15;
         y += 150;
       }
     }
-     frame.setVisible(true);
+    //mainPane.repaint();
+    frame.add(mainPane);
+    frame.setVisible(true);
   }
-
+  //TODO potentially make buttons instead of scroll panes
 }
 

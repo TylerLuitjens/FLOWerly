@@ -43,7 +43,8 @@ public class Checkpoint implements Serializable{
 
 	public void setText(String newText){
 		text = newText;
-		textArea.setText(this.toString());
+		//textArea.setText(this.toString());
+		setTextArea();
 	}
 	
 	public String getText(){
@@ -79,14 +80,13 @@ public class Checkpoint implements Serializable{
 	}
 
 	private void setTextArea(){
-		JTextArea textArea = new JTextArea(5,15);
+		textArea = new JTextArea(5,15);
 		textArea.setMargin( new Insets(5,10,0,10) );
 		textArea.setText(this.toString());
 		textArea.setBackground(Color.LIGHT_GRAY);
 		textArea.setEditable(false);
 		textArea.setLineWrap(true);
 		textArea.setWrapStyleWord(true);
-		this.textArea = textArea;
 	}
 
 	public JTextArea getTextArea(){
