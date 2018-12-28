@@ -1,13 +1,35 @@
-import java.awt.*;
-import javax.swing.*;
+/*
+TODO Make whole pane scrollable
+TODO put a button at the bottom of each scroll pane to populate the children and the parents of each one
+TODO single modal that is hidden until that button is clicked, and is populated as stated above
+TODO Recieve input from user to add / delete checkpoints
+TODO Figure out how to make an exe file to click on from the desktop
+TODO Toolbar on left side with a plus sign and a minus sign and an edit button
+TODO Find good layout manager for the buttons to match theme
+TODO Explore other fonts as well
+*/
+import java.awt.Container;
+import java.awt.Rectangle;
+import java.awt.Insets;
+import java.awt.Color;
+import java.awt.Dimension;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JFrame;
+import javax.swing.ScrollPaneLayout;
+import javax.swing.WindowConstants;
 import java.util.ArrayList;
 import java.io.File;
-import java.io.*;
+import java.io.ObjectOutputStream;
+import java.io.ObjectInputStream;
+import java.io.FileOutputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
 
 public class Flowerly extends JPanel{
 
-  private static Point startPoint;
-  private static Point endPoint;
+ // private static Point startPoint;
+  //private static Point endPoint;
   private static ArrayList<Checkpoint> checkpoints;
   private static JFrame frame;
   private static JScrollPane mainPane;
@@ -35,7 +57,11 @@ public class Flowerly extends JPanel{
     check.addParent(testField);
     check.setText("Hello from the final text box I will be adding text to this way. From now on I will be doing it through the input box I will be adding in at a later time"); 
     check.setName("check");
-  
+    
+    for(int i = 0; i<20; i++){
+        checkpoints.add(new Checkpoint());
+    }
+
     Checkpoint point = new Checkpoint();
     point.setName("point");
     createOrUpdate();
@@ -82,7 +108,6 @@ public class Flowerly extends JPanel{
     scroller.setComponentZOrder(scroller.getViewport(), 1);
     scroller.getVerticalScrollBar().setOpaque(false);
     scroller.getVerticalScrollBar().setUI(new MyScrollBarUI());
-
   }
 
   private static void save(){
@@ -96,7 +121,6 @@ public class Flowerly extends JPanel{
   }
 
   private static void createOrUpdate(){
-    //TODO need to make this whole jframe scrollable, which still doesnt work
     int numDrawn;
     int x = 15;
     if(checkpoints.size() > 0){
@@ -113,16 +137,12 @@ public class Flowerly extends JPanel{
     {
       frame = new JFrame("FLOWerly - Find Your Flow");
       frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-      frame.getContentPane().setBackground(Color.DARK_GRAY);
-      //frame.getContentPane().setLayout(null);
+      frame.getContentPane().setBackground(Color.cyan);
       frame.setSize(1400, 720);
-      frame.setVisible(true);
 
       container = new JPanel(null);
       container.setBackground(Color.DARK_GRAY);
-      mainPane = new JScrollPane(container);
-      setLayout(mainPane);
-      mainPane.setBackground(Color.DARK_GRAY);
+     
     }
     else{
       container.removeAll();
@@ -140,10 +160,13 @@ public class Flowerly extends JPanel{
         y += 150;
       }
     }
-    //mainPane.repaint();
-    frame.add(mainPane);
+
+    mainPane = new JScrollPane(container);
+    mainPane.setMaximumSize(new Dimension(1400, 720));
+    setLayout(mainPane);
+    mainPane.setBackground(Color.DARK_GRAY);
+    frame.getContentPane().add(mainPane);
     frame.setVisible(true);
   }
-  //TODO potentially make buttons instead of scroll panes
 }
 
