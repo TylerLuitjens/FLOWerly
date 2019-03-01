@@ -165,7 +165,7 @@ public class Flowerly extends JPanel{
         y += 150;
       }
     }
-
+  //TODO get this to work without the scrollpane
     mainPane = new JScrollPane(container);
     mainPane.setMaximumSize(new Dimension(1400, 720));
     setLayout(mainPane);
