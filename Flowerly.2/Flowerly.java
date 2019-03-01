@@ -1,14 +1,15 @@
 /*
-TODO Make whole pane scrollable
-TODO put a button at the bottom of each scroll pane to populate the children and the parents of each one
-TODO single modal that is hidden until that button is clicked, and is populated as stated above
-TODO Recieve input from user to add / delete checkpoints
-TODO Figure out how to make an exe file to click on from the desktop
-TODO Toolbar on left side with a plus sign and a minus sign and an edit button
-TODO Make each checkpoint a button? then you can click on it, change the border color onclick then populate screen with children of clicked
-TODO Find good layout manager for the buttons to match theme
-TODO Explore other fonts as well
-*/
+   TODO Make whole pane scrollable
+   TODO put a button at the bottom of each scroll pane to populate the children and the parents of each one
+   TODO single modal that is hidden until that button is clicked, and is populated as stated above
+   TODO Recieve input from user to add / delete checkpoints
+   TODO Figure out how to make an exe file to click on from the desktop
+   TODO Toolbar on left side with a plus sign and a minus sign and an edit button
+   TODO Make each checkpoint a button? then you can click on it, change the border color onclick then populate screen with children of clicked
+   TODO Find good layout manager for the buttons to match theme
+   TODO Explore other fonts as well
+   TODO set tooltips up for the buttons
+ */
 import java.awt.Container;
 import java.awt.Rectangle;
 import java.awt.Insets;
@@ -17,7 +18,9 @@ import java.awt.Dimension;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JFrame;
+import javax.swing.JTextArea;
 import javax.swing.ScrollPaneLayout;
+import java.awt.GridLayout;
 import javax.swing.WindowConstants;
 import java.util.ArrayList;
 import java.io.File;
@@ -29,7 +32,7 @@ import java.io.IOException;
 
 public class Flowerly extends JPanel{
 
- // private static Point startPoint;
+  // private static Point startPoint;
   //private static Point endPoint;
   private static ArrayList<Checkpoint> checkpoints;
   private static JFrame frame;
@@ -58,26 +61,23 @@ public class Flowerly extends JPanel{
     check.addParent(testField);
     check.setText("Hello from the final text box I will be adding text to this way. From now on I will be doing it through the input box I will be adding in at a later time"); 
     check.setName("check");
-    
-    for(int i = 0; i<20; i++){
-        checkpoints.add(new Checkpoint());
-    }
 
     Checkpoint point = new Checkpoint();
     point.setName("point");
     createOrUpdate();
     checkpoints.add(point);
     createOrUpdate();
+
   }
 
 
 
   //sets up the scrollbar look
   private static void setLayout(JScrollPane scroller){
-   
+
     scroller.setLayout(new ScrollPaneLayout() {
-      @Override
-      public void layoutContainer(Container parent) {
+        @Override
+        public void layoutContainer(Container parent) {
         JScrollPane scrollPane = (JScrollPane) parent;
 
         Rectangle availR = scrollPane.getBounds();
@@ -102,7 +102,7 @@ public class Flowerly extends JPanel{
           vsb.setVisible(true);
           vsb.setBounds(vsbR);
         }
-      }
+        }
     });
 
     scroller.setComponentZOrder(scroller.getVerticalScrollBar(), 0);
@@ -111,7 +111,7 @@ public class Flowerly extends JPanel{
     scroller.getVerticalScrollBar().setUI(new MyScrollBarUI());
   }
 
-  private static void save(){
+  private static void save(){//TODO this doesn't fully work yet
     try{
       ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("checkpoint.fly"));
       oos.writeObject(checkpoints);
@@ -129,33 +129,37 @@ public class Flowerly extends JPanel{
         x = 550;
       else  
         x = 1400 / checkpoints.size() - 305;
-      if(x < 15)
+      if(x < 15)//TODO might be superfluous
         x = 15;
     }
-    
+
     int y = 10;
+
     if(frame == null)
     {
       frame = new JFrame("FLOWerly - Find Your Flow");
       frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-      frame.getContentPane().setBackground(Color.cyan);
       frame.setSize(1400, 720);
 
       container = new JPanel(null);
       container.setBackground(Color.DARK_GRAY);
-     
+
     }
     else{
       container.removeAll();
       container.revalidate();
       container.repaint();
     }
+
     for(Checkpoint c : checkpoints){
+
       JScrollPane pane = new JScrollPane(c.getTextArea());
       setLayout(pane);
       pane.setBounds(x, y, 300, 100);
       container.add(pane);
       x += 350;
+
+      //make it wrap around and start a new line when the boxes reach the edge of the frame
       if(x > 1100){
         x = 15;
         y += 150;
@@ -168,6 +172,10 @@ public class Flowerly extends JPanel{
     mainPane.setBackground(Color.DARK_GRAY);
     frame.getContentPane().add(mainPane);
     frame.setVisible(true);
+  }
+
+  void setMainCheckpoint(Checkpoint pt){
+    //TODO this puts the focus onto the selected checkpoint and brings up its children for viewing
   }
 }
 
