@@ -153,8 +153,7 @@ public class Flowerly extends JPanel{
 
     for(Checkpoint c : checkpoints){
 
-      JScrollPane pane = new JScrollPane(c.getTextArea());
-      setLayout(pane);
+      JTextArea pane = c.getTextArea();
       pane.setBounds(x, y, 300, 100);
       container.add(pane);
       x += 350;
@@ -164,8 +163,9 @@ public class Flowerly extends JPanel{
         x = 15;
         y += 150;
       }
+      pane = null;
     }
-  //TODO get this to work without the scrollpane
+  //TODO make sure this works correctly with larger quantaties of checkpoints
     mainPane = new JScrollPane(container);
     mainPane.setMaximumSize(new Dimension(1400, 720));
     setLayout(mainPane);
