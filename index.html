@@ -1,0 +1,90 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>Tyler Luitjens - Home</title>
+ <!--make this function into one that makes the menu icon spin maybe-->
+  <script type="text/javascript"> 
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-21759079-1']);
+    _gaq.push(['_trackPageview']);
+    (function () {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+<style>
+  .dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+  }
+  
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color:black;
+    color: white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-content a {
+    color:white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .dropdown-content a:hover {background-color: #333333;}
+  
+  .dropdown:hover .dropdown-content {display: block;}
+  
+  .dropdown:hover .dropbtn {background-color: #3e8e41;}
+
+  .menuicon{
+    width:50px; 
+    height:auto; 
+    margin-left: 20px; 
+  }
+
+  .menuicon :hover{background-color: #3333}
+
+  .center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+  </style>
+</head>
+
+<body style="background-color:black">
+  <div>
+    <div class="dropdown">
+      <img src="./img/lighticon.png", class="menuicon">
+      <div class="dropdown-content">
+        <a href="#">Number 1</a>
+        <a href="#">Number 2</a>
+        <a href="#">Number 3</a>
+        <a href="#">Number 4</a>
+      </div>
+    </div>
+  </div>
+ 
+  <div>
+    <img src="./img/largelogo.png" alt="my logo" class="center">
+  </div>
+</body>
+
+</html>
