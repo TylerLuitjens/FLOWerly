@@ -59,12 +59,8 @@ uint8_t crcNaive(uint8_t const message) //This one goes bit by bit rather than b
 } 
 //source: https://barrgroup.com/Embedded-Systems/How-To/CRC-Calculation-C-Code
 //TODO need to port this over to c++ rather than c since it throws a lot of errors
-#include <zlib.h>   uLong crc = crc32(0L, Z_NULL, 0);
 
-     while (read_buffer(buffer, length) != EOF) {
-       crc = crc32(crc, buffer, length);
-     }
-     if (crc != original_crc) error();
+//Easiest way to do this
 #include <zlib.h>   uLong crc = crc32(0L, Z_NULL, 0);
 
      while (read_buffer(buffer, length) != EOF) {
