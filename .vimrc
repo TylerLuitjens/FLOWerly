@@ -35,7 +35,7 @@ inoremap <F4> <Esc>mqggVG=`qzza
 map <F8> :set makeprg=javac\ %<CR>:make<CR>
 map <F9> :!echo %\|awk -F. '{print $1}'\|xargs java<CR>
 
-inoremap jj <Esc>
+inoremap jj <Esc> " make "j j" be the new esc button for easy access
 
 " make movements go by visual line rather than \n character
 noremap <silent> k gk
