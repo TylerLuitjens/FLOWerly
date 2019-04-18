@@ -1,4 +1,8 @@
 #!/bin/bash
+for filename in ./*.cpp; do
+  [ -e "$filename" ] || continue
+  # ... rest of the loop's body
+done
 
 touch tempfile.txt
 chmod 777 tempfile.txt
