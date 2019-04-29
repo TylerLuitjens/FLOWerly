@@ -1,0 +1,84 @@
+#!/bin/bash
+#TODO add in a switch for c or cc files
+#clean up the files first to avoid errors
+
+compile_cc() { 
+    rm *.cc.out
+    rm *log.txt
+
+    for filename in ./*.cc; do 
+      [ -e "$filename" ] || continue
+      echo "Compiling $filename..."
+      g++ $filename -o $filename.out 2> error_log.txt
+
+      if [ -e $filename.out ]
+      then
+        echo "  success... executing..."
+        ./$filename.out 
+        retVal=$?
+        if [ $retVal -ne 0 ];
+          then
+            echo "$filename.out - seg faulted" >> run_error_log.txt
+        fi
+
+      else
+        echo "  error... Logging. Please see error_log.txt for more details..."
+        echo "$filename" >> file_log.txt
+        echo "" >> file_log.txt
+      fi
+      echo ""
+    done
+}
+
+compile_c() {
+    for filename in ./*.c; do 
+      [ -e "$filename" ] || continue
+      echo "Compiling $filename..."
+      gcc $filename -o $filename.out 2> error_log.txt
+
+      if [ -e $filename.out ]
+      then
+        echo "  success... executing..."
+        ./$filename.out 2> error_log.txt #TODO not actually redirecting the output from the screen
+        retVal=$?
+        if [ $retVal -ne 0 ];
+          then
+            echo $filename.out >> run_error_log.txt
+        fi
+
+      else
+        echo "  error... Logging. Please see error_log.txt for more details..."
+        echo "$filename" >> file_log.txt
+        echo "" >> file_log.txt
+      fi
+    done
+}
+
+echo "Are we grading c or cc files today?"
+read extension
+echo ""
+
+case $extension in
+  "c")
+    compile_c 
+    ;;
+  "cc")
+    compile_cc 
+    ;;
+esac
+echo ""
+echo ""
+echo "The following files could not be compiled: "
+while read files; do
+  echo "$files"
+done < file_log.txt
+
+echo "The following files had run-time errors: "
+while read files; do
+  echo "$files"
+done < run_error_log.txt
+
+
+
+
+#export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:.:/appropriate/directory
