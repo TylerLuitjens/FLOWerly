@@ -1,6 +1,4 @@
 #!/bin/bash
-#TODO add in a switch for c or cc files
-#clean up the files first to avoid errors
 
 compile_cc() { 
     rm *.cc.out
