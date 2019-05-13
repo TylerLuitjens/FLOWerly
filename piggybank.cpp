@@ -14,8 +14,8 @@ int main(){
   std::fstream file;
   file.open(filename, std::fstream::out | fstream::in);
   string line;
-  int price = 0;
-  int curBalance = 0;
+  double price = 0;
+  double curBalance = 0;
 
   if(!file){
     cout << "Looks like this is the first deposit. First things first, what is the price of the product? ";
@@ -29,7 +29,7 @@ int main(){
   }
 
   cout << "How much did you deposit? ";
-  int dep;
+  double dep;
   cin >> dep;
 
   curBalance += dep;
