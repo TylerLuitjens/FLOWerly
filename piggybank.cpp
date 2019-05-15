@@ -35,12 +35,14 @@ int main(){
   curBalance += dep;
 
   cout << "You now have $" << curBalance << " saved up. That means you only need to save $" << price-curBalance << " more!" <<endl;
+
   file.close();
   file.open(filename, fstream::in | fstream::out | fstream::trunc);
   file << price;
   file << endl;
   file << curBalance;
   file.close();
+
 	return 0;
 }
 
