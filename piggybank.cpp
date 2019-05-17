@@ -184,7 +184,7 @@ void help(){
   cout << "Command List" << endl;
   cout << "------------" << endl;
   cout << endl;
-  cout << "list - list all current saving allocations" << endl; //TODO make it so current contributions are also printed out along with their names
+//  cout << "list - list all current saving allocations" << endl; //TODO make it so current contributions are also printed out along with their names
   cout << "help - list out all available commands" << endl;
   cout << "deposit - add a deposit to an existing or new allocation" << endl;
   cout << "delete - remove an allocation. WARNING this will completely remove all data pertaining to the given allocation, with no way to recover it. Use with caution." << endl;
