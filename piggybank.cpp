@@ -20,7 +20,10 @@ int main(){
     cout << "Please enter a command >> ";
     cin >> cmd;
 
-    if(cmd.compare("help") == 0)
+    if(cmd.compare("list") == 0)
+      system("bash ./listAllocations.sh");
+
+    else if(cmd.compare("help") == 0)
       help();
 
     else if(cmd.compare("deposit") == 0){
@@ -46,8 +49,8 @@ int main(){
         getline(file, line);
         curBalance = stoi(line);
       }
-
-      cout << "How much did you deposit? ";//TODO make sure allocation is not locked first
+      if(filestatus.compare("unlocked")==0){
+      cout << "How much did you deposit? ";
       double dep;
       cin >> dep;
 
@@ -62,6 +65,7 @@ int main(){
       file << price;
       file << endl;
       file << curBalance;
+      }
       file.close();
     }
 
@@ -184,7 +188,7 @@ void help(){
   cout << "Command List" << endl;
   cout << "------------" << endl;
   cout << endl;
-//  cout << "list - list all current saving allocations" << endl; //TODO make it so current contributions are also printed out along with their names
+  cout << "list - list all current saving allocations" << endl;
 //  cout << "duplicate - copy an allocation's data to another allocation name of your choice" << endl; //TODO
   cout << "help - list out all available commands" << endl;
   cout << "deposit - add a deposit to an existing or new allocation" << endl;
