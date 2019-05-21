@@ -36,13 +36,13 @@ int main(){
       string line;
       double price = 0;
       double curBalance = 0;
+      string filestatus;
 
       if(!file){
         cout << "Looks like this is the first deposit. First things first, what is the price of the product? ";
         cin >> price;
       }
       else{
-        string filestatus;
         getline(file, filestatus);
         getline(file, line);
         price = stoi(line);
@@ -172,6 +172,35 @@ int main(){
      
     }
 
+    else if(cmd.compare("copy")==0){
+      cout << "What would you like the new allocation to be named: ";
+      string newFile, oldFile, filestatus, line;
+      cin >> newFile;
+      cout << "What file data would you like to copy: ";
+      cin >> oldFile;
+
+      file.open("." + oldFile + ".pgb", std::fstream::out | fstream::in);
+      if(!file){
+        cout << "I'm sorry, it looks like that allocation doesn't exist. Please verify the name and try again." << endl;
+      }
+      else{
+        getline(file, filestatus);
+        getline(file, line);
+        int price = stoi(line);
+        getline(file, line);
+        int curBalance = stoi(line);
+        file.close();
+        
+        file.open("." + newFile + ".pgb", std::fstream::out | fstream::in | fstream::trunc);
+        file << filestatus;
+        file << endl;
+        file << price;
+        file << endl;
+        file << curBalance;
+        file.close();
+      }
+    }
+
     else if(cmd.compare("exit") != 0){
       cout << "I'm sorry that command isn't recognized. To see a list of valid commands, type 'help'" << endl;
     }
@@ -189,7 +218,7 @@ void help(){
   cout << "------------" << endl;
   cout << endl;
   cout << "list - list all current saving allocations" << endl;
-//  cout << "duplicate - copy an allocation's data to another allocation name of your choice" << endl; //TODO
+  cout << "copy - duplicate an allocation's data to another allocation name of your choice" << endl;
   cout << "help - list out all available commands" << endl;
   cout << "deposit - add a deposit to an existing or new allocation" << endl;
   cout << "delete - remove an allocation. WARNING this will completely remove all data pertaining to the given allocation, with no way to recover it. Use with caution." << endl;
