@@ -69,7 +69,7 @@ int main(){
       file.close();
     }
 
-    else if(cmd.compare("delete") == 0){//TODO make sure file is not locked first
+    else if(cmd.compare("delete") == 0){
       string filename;
       cout << "What file would you like to delete: ";
       cin >> filename;
@@ -156,8 +156,13 @@ int main(){
         getline(file, line);
         curBalance = stoi(line);
         
-        cout << "What is the new status? (unlocked, locked, or completed) ";
-        string newStatus;
+        string newStatus = "unlocked";
+        if(cmd.compare("unlock")==0)
+          newStatus = "unlocked";
+        else if(cmd.compare("lock")==0)
+          newStatus = "locked";
+        else if(cmd.compare("complete"))
+          newStatus = "complete";
         cin >> newStatus;
         cout << "Status has been changed from " << filestatus << " to " << newStatus << " for " << filename << endl;
         file.close();
