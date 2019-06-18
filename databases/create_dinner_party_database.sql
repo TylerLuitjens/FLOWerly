@@ -3,14 +3,13 @@ DROP DATABASE IF EXISTS DinnerParty;
 CREATE DATABASE DinnerParty; 
 /* */
 USE DinnerParty;
-DROP TABLE IF EXISTS UserGameFavorites;
-DROP TABLE IF EXISTS UserGameRating;
+DROP TABLE IF EXISTS UserGamesFavorites;
+DROP TABLE IF EXISTS UserGamesRating;
 DROP TABLE IF EXISTS UserGames;
 DROP TABLE IF EXISTS GamesGenres;
-DROP TABLE IF EXISTS Games;
 DROP TABLE IF EXISTS Genres;
 DROP TABLE IF EXISTS UserInformation;
-
+DROP TABLE IF EXISTS Games;
 
 CREATE TABLE Genres(
 	genre_id INT AUTO_INCREMENT,
@@ -76,7 +75,7 @@ CREATE TABLE UserGamesFavorites(
     FOREIGN KEY (game_id) REFERENCES Games (game_id)
 );
 
-CREATE TABLE UserGameRating(
+CREATE TABLE UserGamesRating(
 	user_id INT,
     game_id INT,
     rating INT,
