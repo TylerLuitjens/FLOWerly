@@ -48,7 +48,9 @@ INSERT INTO Genres
 INSERT INTO Genres
   (genre_name)
   VALUES ('Fast-Paced');
-  
+INSERT INTO Genres
+  (genre_name)
+  VALUES ('Easy to learn, Hard to Master');
 INSERT INTO Games
 	(game_name, min_players, max_players, min_age, game_duration, game_description, game_price, game_publisher, game_release_date, num_pieces)
     VALUES 
@@ -147,4 +149,31 @@ INSERT INTO GamesGenres(game_id, genre_id)
 	VALUES
     ((SELECT MAX(game_id) FROM Games), 
     (SELECT genre_id FROM Genres WHERE genre_name = 'Family'));
-
+    
+INSERT INTO Games
+	(game_name, min_players, max_players, min_age, game_duration, game_description, game_price, game_publisher, num_pieces)
+    VALUES 
+    ('Tak', 2, 2, 12,'15-20 minutes',
+    'A Beautiful Game', 45.00,
+    'Cheapass Games', 42
+    );
+INSERT INTO GamesGenres(game_id, genre_id)
+	VALUES
+    ((SELECT MAX(game_id) FROM Games), 
+    (SELECT genre_id FROM Genres WHERE genre_name = 'Board Game'));
+INSERT INTO GamesGenres(game_id, genre_id)
+	VALUES
+    ((SELECT MAX(game_id) FROM Games), 
+    (SELECT genre_id FROM Genres WHERE genre_name = 'Easy to learn, Hard to Master'));
+INSERT INTO GamesGenres(game_id, genre_id)
+	VALUES
+    ((SELECT MAX(game_id) FROM Games), 
+    (SELECT genre_id FROM Genres WHERE genre_name = 'Family'));
+INSERT INTO GamesGenres(game_id, genre_id)
+	VALUES
+    ((SELECT MAX(game_id) FROM Games), 
+    (SELECT genre_id FROM Genres WHERE genre_name = 'Strategy'));
+INSERT INTO GamesGenres(game_id, genre_id)
+	VALUES
+    ((SELECT MAX(game_id) FROM Games), 
+    (SELECT genre_id FROM Genres WHERE genre_name = 'Worker Placement'));
