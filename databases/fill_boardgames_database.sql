@@ -1,4 +1,4 @@
-USE DinnerParty;
+USE BoardGames;
 
 INSERT INTO Genres
   (genre_name)
@@ -6,6 +6,9 @@ INSERT INTO Genres
 INSERT INTO Genres
   (genre_name)
   VALUES ('Board Game');
+INSERT INTO Genres
+  (genre_name)
+  VALUES ('Digital');
 INSERT INTO Genres
   (genre_name)
   VALUES ('Puzzle');
@@ -80,6 +83,10 @@ INSERT INTO GamesGenres(game_id, genre_id)
 	VALUES
     ((SELECT MAX(game_id) FROM Games), 
     (SELECT genre_id FROM Genres WHERE genre_name = 'Diplomacy'));
+INSERT INTO GamesGenres(game_id, genre_id)
+	VALUES
+    ((SELECT MAX(game_id) FROM Games), 
+    (SELECT genre_id FROM Genres WHERE genre_name = 'World Building'));
 
 INSERT INTO Games
 	(game_name, min_players, max_players, min_age, game_duration, game_description, game_price, game_publisher, game_release_date, num_pieces)
@@ -147,7 +154,7 @@ INSERT INTO GamesGenres(game_id, genre_id)
     (SELECT genre_id FROM Genres WHERE genre_name = 'Fast-Paced'));
 INSERT INTO GamesGenres(game_id, genre_id)
 	VALUES
-    ((SELECT MAX(game_id) FROM Games), 
+    ((SELECT MAX(game_id) FROM Games),
     (SELECT genre_id FROM Genres WHERE genre_name = 'Family'));
     
 INSERT INTO Games
@@ -177,3 +184,100 @@ INSERT INTO GamesGenres(game_id, genre_id)
 	VALUES
     ((SELECT MAX(game_id) FROM Games), 
     (SELECT genre_id FROM Genres WHERE genre_name = 'Worker Placement'));
+    
+
+INSERT INTO Games
+	(game_name, min_players, max_players, min_age, game_duration, game_description, game_price, game_publisher, num_pieces)
+    VALUES 
+    ('Quoridor', 2, 4, 8,'10-15 minutes',
+    'Modern classic abstract strategy game', 34.99,
+    'Mirko Marchesi', 24
+    );
+INSERT INTO GamesGenres(game_id, genre_id)
+	VALUES
+    ((SELECT MAX(game_id) FROM Games), 
+    (SELECT genre_id FROM Genres WHERE genre_name = 'Board Game'));
+INSERT INTO GamesGenres(game_id, genre_id)
+	VALUES
+    ((SELECT MAX(game_id) FROM Games), 
+    (SELECT genre_id FROM Genres WHERE genre_name = 'Easy to learn, Hard to Master'));
+INSERT INTO GamesGenres(game_id, genre_id)
+	VALUES
+    ((SELECT MAX(game_id) FROM Games), 
+    (SELECT genre_id FROM Genres WHERE genre_name = 'Family'));
+INSERT INTO GamesGenres(game_id, genre_id)
+	VALUES
+    ((SELECT MAX(game_id) FROM Games), 
+    (SELECT genre_id FROM Genres WHERE genre_name = 'Strategy'));
+INSERT INTO GamesGenres(game_id, genre_id)
+	VALUES
+    ((SELECT MAX(game_id) FROM Games), 
+    (SELECT genre_id FROM Genres WHERE genre_name = 'Worker Placement'));
+    
+INSERT INTO Games
+	(game_name, min_players, max_players, min_age, game_duration, game_description, game_price, game_publisher, num_pieces)
+    VALUES 
+    ('Risk', 2, 5, 10,'30 minutes per person',
+    'The Game of Strategic Conquest', 24.99,
+    'Hasbro', 366
+    );
+INSERT INTO GamesGenres(game_id, genre_id)
+	VALUES
+    ((SELECT MAX(game_id) FROM Games), 
+    (SELECT genre_id FROM Genres WHERE genre_name = 'Board Game'));
+INSERT INTO GamesGenres(game_id, genre_id)
+	VALUES
+    ((SELECT MAX(game_id) FROM Games), 
+    (SELECT genre_id FROM Genres WHERE genre_name = 'Easy to learn, Hard to Master'));
+INSERT INTO GamesGenres(game_id, genre_id)
+	VALUES
+    ((SELECT MAX(game_id) FROM Games), 
+    (SELECT genre_id FROM Genres WHERE genre_name = 'Family'));
+INSERT INTO GamesGenres(game_id, genre_id)
+	VALUES
+    ((SELECT MAX(game_id) FROM Games), 
+    (SELECT genre_id FROM Genres WHERE genre_name = 'Strategy'));
+INSERT INTO GamesGenres(game_id, genre_id)
+	VALUES
+    ((SELECT MAX(game_id) FROM Games), 
+    (SELECT genre_id FROM Genres WHERE genre_name = 'Worker Placement'));
+INSERT INTO GamesGenres(game_id, genre_id)
+	VALUES
+    ((SELECT MAX(game_id) FROM Games), 
+    (SELECT genre_id FROM Genres WHERE genre_name = 'World Building'));
+INSERT INTO GamesGenres(game_id, genre_id)
+	VALUES
+    ((SELECT MAX(game_id) FROM Games), 
+    (SELECT genre_id FROM Genres WHERE genre_name = 'Diplomacy'));
+    
+INSERT INTO Games
+	(game_name, min_players, max_players, min_age, game_duration, game_description, game_price, game_publisher, num_pieces)
+    VALUES 
+    ('Jackbox Party Pack', 2, 4, 10,'15-20 minutes',
+    'The Game of Strategic Conquest', 29.99,
+    'Jackbox Games', 0
+    );
+INSERT INTO GamesGenres(game_id, genre_id)
+	VALUES
+    ((SELECT MAX(game_id) FROM Games), 
+    (SELECT genre_id FROM Genres WHERE genre_name = 'Digital'));
+INSERT INTO GamesGenres(game_id, genre_id)
+	VALUES
+    ((SELECT MAX(game_id) FROM Games), 
+    (SELECT genre_id FROM Genres WHERE genre_name = 'Family'));
+INSERT INTO GamesGenres(game_id, genre_id)
+	VALUES
+    ((SELECT MAX(game_id) FROM Games), 
+    (SELECT genre_id FROM Genres WHERE genre_name = 'Memory'));
+INSERT INTO GamesGenres(game_id, genre_id)
+	VALUES
+    ((SELECT MAX(game_id) FROM Games), 
+    (SELECT genre_id FROM Genres WHERE genre_name = 'Art'));
+INSERT INTO GamesGenres(game_id, genre_id)
+	VALUES
+    ((SELECT MAX(game_id) FROM Games), 
+    (SELECT genre_id FROM Genres WHERE genre_name = 'Acting'));
+INSERT INTO GamesGenres(game_id, genre_id)
+	VALUES
+    ((SELECT MAX(game_id) FROM Games), 
+    (SELECT genre_id FROM Genres WHERE genre_name = 'Teams'));

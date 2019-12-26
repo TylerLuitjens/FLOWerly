@@ -1,8 +1,8 @@
 /*
-DROP DATABASE IF EXISTS DinnerParty;
-CREATE DATABASE DinnerParty; 
+DROP DATABASE IF EXISTS BoardGames;
+CREATE DATABASE BoardGames; 
 /* */
-USE DinnerParty;
+USE BoardGames;
 DROP TABLE IF EXISTS UserGamesFavorites;
 DROP TABLE IF EXISTS UserGamesRating;
 DROP TABLE IF EXISTS UserGames;
